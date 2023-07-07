@@ -20,6 +20,7 @@ type Greeter struct {
 }
 
 // GreeterRepo is a Greater repo.
+// 这里定义在biz中对应的req和resp，用来处理来自service的请求和响应
 type GreeterRepo interface {
 	Save(context.Context, *Greeter) (*Greeter, error)
 	Update(context.Context, *Greeter) (*Greeter, error)

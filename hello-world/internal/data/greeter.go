@@ -2,14 +2,13 @@ package data
 
 import (
 	"context"
-
 	"hello-world/internal/biz"
 
 	"github.com/go-kratos/kratos/v2/log"
 )
 
 // data 通过通过传入biz中定义的req，返回biz中定义的resp
-
+// Data中用来处理外面数据的请求依赖，包括数据库的操作，redis的操作等
 type greeterRepo struct {
 	data *Data
 	log  *log.Helper
