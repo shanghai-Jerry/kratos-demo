@@ -1,7 +1,6 @@
 # kratos-demo
 a demo service created by kratos
 
-
 ## 目录说明
 1. api: 对外接口定义
 2. cmd: 服务的运行入口
