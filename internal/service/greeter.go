@@ -5,6 +5,7 @@ import (
 
 	v1 "github.com/shanghai-Jerry/krato-demo/api/helloworld/v1"
 	"github.com/shanghai-Jerry/krato-demo/internal/biz"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // Service 将proto request转换为biz 中定义的req，请求得到biz中定义的resp，然后返回proto中的resp
@@ -26,5 +27,5 @@ func (s *GreeterService) SayHello(ctx context.Context, in *v1.HelloRequest) (*v1
 	if err != nil {
 		return nil, err
 	}
-	return &v1.HelloReply{Message: "Hello " + g.Hello}, nil
+	return &v1.HelloReply{Message: "Hello " + g.Hello, Now: timestamppb.New(g.Now)}, nil
 }

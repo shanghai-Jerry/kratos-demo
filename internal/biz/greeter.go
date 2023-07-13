@@ -2,6 +2,7 @@ package biz
 
 import (
 	"context"
+	"time"
 
 	v1 "github.com/shanghai-Jerry/krato-demo/api/helloworld/v1"
 
@@ -17,6 +18,7 @@ var (
 // Greeter is a Greeter model.
 type Greeter struct {
 	Hello string
+	Now   time.Time
 }
 
 // GreeterRepo is a Greater repo.
@@ -27,6 +29,7 @@ type GreeterRepo interface {
 	FindByID(context.Context, int64) (*Greeter, error)
 	ListByHello(context.Context, string) ([]*Greeter, error)
 	ListAll(context.Context) ([]*Greeter, error)
+	OtherFun() string
 }
 
 // GreeterUsecase is a Greeter usecase.

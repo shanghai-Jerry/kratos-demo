@@ -2,6 +2,8 @@ package data
 
 import (
 	"context"
+	"time"
+
 	"github.com/shanghai-Jerry/krato-demo/internal/biz"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -23,6 +25,7 @@ func NewGreeterRepo(data *Data, logger log.Logger) biz.GreeterRepo {
 }
 
 func (r *greeterRepo) Save(ctx context.Context, g *biz.Greeter) (*biz.Greeter, error) {
+	g.Now = time.Now()
 	return g, nil
 }
 
@@ -40,4 +43,9 @@ func (r *greeterRepo) ListByHello(context.Context, string) ([]*biz.Greeter, erro
 
 func (r *greeterRepo) ListAll(context.Context) ([]*biz.Greeter, error) {
 	return nil, nil
+}
+
+// OtherFun implements biz.GreeterRepo.
+func (r *greeterRepo) OtherFun() string {
+	return "i am not implemented"
 }
