@@ -11,7 +11,10 @@ a demo service created by kratos
    3. data: 数据model处理
    4. server: 具体服务的初始化，包括http和grpc
    5. service: 服务的具体接口实现
-5. third_party: 外部依赖
+5. third_party: 外部依赖, 将主要依赖的分散在不同仓库的proto原文件，统一管理起来，方便项目内部proto直接引用
+   1. [google/api](https://github.com/googleapis/googleapis/tree/master/google/api)
+   2. [google/protobuf](https://github.com/protocolbuffers/protobuf/tree/main/src/google/protobuf)
+   3. [openapiv3](https://github.com/google/gnostic/tree/main/openapiv3)
 
 ## server具体逻辑依赖
 
