@@ -38,7 +38,7 @@ config:
 .PHONY: api
 # generate api proto
 api:
-	protoc --proto_path=./api \
+	mkdir -p api/docs && protoc --proto_path=./api \
 	       --proto_path=./third_party \
  	       --go_out=paths=source_relative:./api \
  	       --go-http_out=paths=source_relative:./api \
