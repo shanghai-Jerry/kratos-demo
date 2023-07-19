@@ -3,8 +3,7 @@
 
 openapi: 3.0.3
 info:
-    title: Greeter API
-    description: The greeting service definition.
+    title: ""
     version: 0.0.1
 paths:
     /helloworld/{name}:
@@ -26,6 +25,242 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/helloworld.v1.HelloReply'
+    /kb/create:
+        post:
+            tags:
+                - KBService
+            description: |-
+                接口: 知识库管理
+                 创建
+            operationId: KBService_Create
+            parameters:
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+                - name: description
+                  in: query
+                  schema:
+                    type: string
+                - name: indexMod
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/kb.v1.CreateResponse'
+    /kb/delete:
+        post:
+            tags:
+                - KBService
+            description: 删除
+            operationId: KBService_Delete
+            parameters:
+                - name: kbId
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/kb.v1.DeleteResponse'
+    /kb/doc/list:
+        get:
+            tags:
+                - KBService
+            description: |-
+                接口： 文档管理
+                 列表页(分页处理)
+            operationId: KBService_DocList
+            parameters:
+                - name: kbId
+                  in: query
+                  schema:
+                    type: string
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/kb.v1.DocListResponse'
+    /kb/doc/preview:
+        get:
+            tags:
+                - KBService
+            description: 接口： 分段预览
+            operationId: KBService_DocParaPreview
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/kb.v1.DocParaPreviewResponse'
+    /kb/doc/search:
+        get:
+            tags:
+                - KBService
+            description: 搜索接口(文档名称)
+            operationId: KBService_SearchDoc
+            parameters:
+                - name: kbId
+                  in: query
+                  schema:
+                    type: string
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/kb.v1.DocListResponse'
+    /kb/doc/update:
+        post:
+            tags:
+                - KBService
+            description: |-
+                详情页
+                 状态更新
+            operationId: KBService_DocUpdate
+            parameters:
+                - name: kbId
+                  in: query
+                  schema:
+                    type: string
+                - name: docId
+                  in: query
+                  schema:
+                    type: string
+                - name: paraId
+                  in: query
+                  schema:
+                    type: string
+                - name: status
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/kb.v1.DocUpdateResponse'
+    /kb/list:
+        get:
+            tags:
+                - KBService
+            description: 列表页（分页处理）
+            operationId: KBService_List
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/kb.v1.ListResponse'
+    /kb/query:
+        get:
+            tags:
+                - KBService
+            description: '接口: Query查询'
+            operationId: KBService_QueryDoc
+            parameters:
+                - name: query
+                  in: query
+                  schema:
+                    type: string
+                - name: kbIds
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/kb.v1.QueryResponse'
+    /kb/search:
+        get:
+            tags:
+                - KBService
+            description: 搜索接口 知识库名称
+            operationId: KBService_Search
+            parameters:
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/kb.v1.SearchResponse'
+    /kb/update:
+        post:
+            tags:
+                - KBService
+            description: 更新（名称，描述, 数据存储方式）
+            operationId: KBService_Update
+            parameters:
+                - name: kbId
+                  in: query
+                  schema:
+                    type: string
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+                - name: description
+                  in: query
+                  schema:
+                    type: string
+                - name: vectorStoreMod
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/kb.v1.UpdateResponse'
 components:
     schemas:
         helloworld.v1.HelloReply:
@@ -37,5 +272,148 @@ components:
                     type: string
                     format: date-time
             description: The response message containing the greetings
+        kb.v1.CreateResponse:
+            type: object
+            properties:
+                kbId:
+                    type: string
+        kb.v1.DeleteResponse:
+            type: object
+            properties: {}
+        kb.v1.DocListResponse:
+            type: object
+            properties:
+                kbInfo:
+                    $ref: '#/components/schemas/kb.v1.KBInfo'
+                docs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/kb.v1.KBDoc'
+                releatedAppNames:
+                    type: array
+                    items:
+                        type: string
+        kb.v1.DocParaPreviewResponse:
+            type: object
+            properties: {}
+        kb.v1.DocUpdateResponse:
+            type: object
+            properties: {}
+        kb.v1.KBDoc:
+            type: object
+            properties:
+                kbId:
+                    type: string
+                docId:
+                    type: string
+                name:
+                    type: string
+                size:
+                    type: integer
+                    format: int64
+                parasNum:
+                    type: integer
+                    format: int64
+                hitParaNums:
+                    type: integer
+                    format: int32
+                source:
+                    type: integer
+                    format: enum
+                totalCostSec:
+                    type: integer
+                    format: int32
+                totalTokens:
+                    type: integer
+                    format: int32
+                createdTime:
+                    type: integer
+                    format: int64
+                updatedTime:
+                    type: integer
+                    format: int64
+                paraConfig:
+                    $ref: '#/components/schemas/kb.v1.ParaConfig'
+        kb.v1.KBInfo:
+            type: object
+            properties:
+                kbId:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                docNums:
+                    type: integer
+                    format: int64
+                totalCharNums:
+                    type: integer
+                    format: int64
+                releatedAppNums:
+                    type: integer
+                    format: int32
+                status:
+                    type: integer
+                    format: enum
+                indexMod:
+                    type: integer
+                    format: enum
+                vectorStoreMod:
+                    type: integer
+                    format: enum
+                createdTime:
+                    type: integer
+                    format: int64
+                updatedTime:
+                    type: integer
+                    format: int64
+        kb.v1.ListResponse:
+            type: object
+            properties:
+                kbInfos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/kb.v1.KBInfo'
+                totalCount:
+                    type: integer
+                    format: int64
+        kb.v1.ParaConfig:
+            type: object
+            properties:
+                mod:
+                    type: integer
+                    format: enum
+                extra:
+                    $ref: '#/components/schemas/kb.v1.ParaConfig_Extra'
+        kb.v1.ParaConfig_Extra:
+            type: object
+            properties:
+                delimiter:
+                    type: string
+                maxLengthOfPara:
+                    type: integer
+                    format: int32
+                rules:
+                    type: array
+                    items:
+                        type: integer
+                        format: enum
+        kb.v1.QueryResponse:
+            type: object
+            properties:
+                mostMatched:
+                    type: string
+        kb.v1.SearchResponse:
+            type: object
+            properties:
+                kbInfos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/kb.v1.KBInfo'
+        kb.v1.UpdateResponse:
+            type: object
+            properties: {}
 tags:
     - name: Greeter
+      description: The greeting service definition.
+    - name: KBService
