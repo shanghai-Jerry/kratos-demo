@@ -1,6 +1,9 @@
 GOHOSTOS:=$(shell go env GOHOSTOS)
 GOPATH:=$(shell go env GOPATH)
 VERSION=$(shell git describe --tags --always)
+HOMEDIR := $(shell pwd)
+# 设置编译时所需要的 go 环境
+# export GOENV = $(HOMEDIR)/go.env
 
 ifeq ($(GOHOSTOS), windows)
 	#the `find.exe` is different from `find` in bash/shell.
@@ -13,11 +16,15 @@ ifeq ($(GOHOSTOS), windows)
 else
 	INTERNAL_PROTO_FILES=$(shell find internal -name *.proto)
 	API_PROTO_FILES=$(shell find api -name *.proto)
+	API_PROTO_GEN_FILES=$(shell find api -name *.pb.go)
 endif
+
+set-env:
+	$(GO) env 
 
 .PHONY: init
 # init env
-init:
+init: 
 	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 	go install github.com/go-kratos/kratos/cmd/kratos/v2@latest
@@ -25,7 +32,11 @@ init:
 	go install github.com/google/gnostic/cmd/protoc-gen-openapi@latest
 	go install github.com/google/wire/cmd/wire@latest
 	go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@latest
+	go install github.com/favadi/protoc-go-inject-tag@latest
 
+.PHONY: inject-tag
+inject-tag:
+	cd api/kb/v1 && protoc-go-inject-tag -input="./*.pb.go"
 
 .PHONY: config
 # generate internal proto
