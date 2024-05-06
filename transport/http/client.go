@@ -13,12 +13,14 @@ import (
 	"time"
 
 	"google.golang.org/grpc/encoding"
+	_ "icode.baidu.com/baidu/easydata/yunfan-proto/transport/encoding/json"
 )
 
 // SupportPackageIsVersion1 These constants should not be referenced from any other code.
 const SupportPackageIsVersion1 = true
 
 func init() {
+
 }
 
 // DecodeErrorFunc is decode error func.
