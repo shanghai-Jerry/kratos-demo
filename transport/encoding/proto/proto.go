@@ -3,7 +3,6 @@
 package proto
 
 import (
-	"encoding/json"
 	"errors"
 	"reflect"
 
@@ -12,7 +11,7 @@ import (
 )
 
 // Name is the name registered for the proto compressor.
-const Name = "json"
+const Name = "proto"
 
 func init() {
 	encoding.RegisterCodec(codec{})
@@ -22,7 +21,7 @@ func init() {
 type codec struct{}
 
 func (codec) Marshal(v interface{}) ([]byte, error) {
-	return json.Marshal(v.(proto.Message))
+	return proto.Marshal(v.(proto.Message))
 }
 
 func (codec) Unmarshal(data []byte, v interface{}) error {
@@ -30,7 +29,7 @@ func (codec) Unmarshal(data []byte, v interface{}) error {
 	if err != nil {
 		return err
 	}
-	return json.Unmarshal(data, pm)
+	return proto.Unmarshal(data, pm)
 }
 
 func (codec) Name() string {
