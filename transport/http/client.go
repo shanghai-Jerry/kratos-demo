@@ -12,8 +12,8 @@ import (
 	"strings"
 	"time"
 
+	_ "github.com/shanghai-Jerry/krato-demo/transport/encoding/json"
 	"google.golang.org/grpc/encoding"
-	_ "icode.baidu.com/baidu/easydata/yunfan-proto/transport/encoding/json"
 )
 
 // SupportPackageIsVersion1 These constants should not be referenced from any other code.

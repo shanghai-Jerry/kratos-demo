@@ -14,7 +14,11 @@ service Demo {
 	rpc ListDemo (ListDemoRequest) returns (ListDemoReply);
 }
 
-message CreateDemoRequest {}
+message CreateDemoRequest {
+	int64 id = 1;
+	int32 age = 2;
+	string name = 3;
+}
 message CreateDemoReply {}
 
 message UpdateDemoRequest {}

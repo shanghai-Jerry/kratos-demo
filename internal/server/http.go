@@ -1,7 +1,6 @@
 package server
 
 import (
-	v1 "github.com/shanghai-Jerry/krato-demo/api/helloworld/v1"
 	"github.com/shanghai-Jerry/krato-demo/internal/conf"
 	"github.com/shanghai-Jerry/krato-demo/internal/service"
 
@@ -27,6 +26,6 @@ func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, logger log.L
 		opts = append(opts, http.Timeout(c.Http.Timeout.AsDuration()))
 	}
 	srv := http.NewServer(opts...)
-	v1.RegisterGreeterHTTPServer(srv, greeter)
+	// v1.RegisterGreeterHTTPServer(srv, greeter)
 	return srv
 }

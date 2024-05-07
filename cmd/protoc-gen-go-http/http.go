@@ -17,7 +17,7 @@ import (
 
 const (
 	contextPackage       = protogen.GoImportPath("context")
-	transportHTTPPackage = protogen.GoImportPath("icode.baidu.com/baidu/easydata/yunfan-proto/transport/http")
+	transportHTTPPackage = protogen.GoImportPath("github.com/shanghai-Jerry/krato-demo/transport/http")
 	bindingPackage       = protogen.GoImportPath("github.com/gin-gonic/gin")
 	ginPackage           = protogen.GoImportPath("github.com/gin-gonic/gin")
 )

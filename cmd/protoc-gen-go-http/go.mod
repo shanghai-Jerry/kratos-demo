@@ -1,4 +1,4 @@
-module icode.baidu.com/baidu/easydata/yunfan-proto/cmd/protoc-gen-go-http
+module github.com/shanghai-Jerry/krato-demo/cmd/protoc-gen-go-http
 
 go 1.20
 
