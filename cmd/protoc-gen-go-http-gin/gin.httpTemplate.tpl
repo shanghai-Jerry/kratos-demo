@@ -35,7 +35,7 @@ func _{{$svrType}}_{{.Name}}{{.Num}}_HTTP_Handler(srv {{$svrType}}HTTPServer) fu
 			return
 		}
 		{{- if .HasVars}}
-		if err := ctx.BindVars(&in); err != nil {
+		if err := ctx.BindQuery(&in); err != nil {
 			ctx.AbortWithError(400, err)
 			return
 		}
